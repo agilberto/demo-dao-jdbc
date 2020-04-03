@@ -4,7 +4,7 @@ import java.util.List;
 
 import modelo.entidade.Vendedor;
 
-public interface VandedorDao {
+public interface VendedorDao {
 	
 	void insert(Vendedor obj);
 	void upadate(Vendedor obj);
