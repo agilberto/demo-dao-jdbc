@@ -28,7 +28,6 @@ public class VendedorDaoJDBC implements VendedorDao {
 	public void insert(Vendedor obj) {
 		 
 		PreparedStatement st = null;
-	 
 		
 		try {
 			
@@ -65,14 +64,33 @@ public class VendedorDaoJDBC implements VendedorDao {
 			DB.closeStatement(st);
 			 
 		}
-		
-		
 	}
 
 	@Override
 	public void upadate(Vendedor obj) {
-		// TODO Auto-generated method stub
+		 
+		PreparedStatement st = null;
 		
+		try {
+			
+			st = conn.prepareStatement("Update seller set Name=?, Email=?, BirthDate=?, "
+									 + "BaseSalary=?, DepartmentId=? where id=? ");
+										 
+			st.setString(1, obj.getNome());
+			st.setString(2, obj.getEmail());
+		    st.setDate(3, new java.sql.Date(obj.getDataNascimento().getTime()));
+		 	st.setDouble(4, obj.getSalarioBase());
+		 	st.setInt(5, obj.getDepartamento().getId());
+		    st.setInt(6, obj.getId());
+			
+			st.executeUpdate();
+
+		}catch(SQLException e){
+			throw new DbException(e.getMessage());
+		}
+		finally {
+			DB.closeStatement(st);
+		}
 	}
 
 	@Override
@@ -91,7 +109,6 @@ public class VendedorDaoJDBC implements VendedorDao {
 		st = conn.prepareStatement("SELECT seller.*,department.Name as DepName  FROM seller "
 					             + "INNER JOIN department  ON seller.DepartmentId = department.Id"
 					             + "  WHERE seller.Id = ? ");
-					 
 			
 			st.setInt(1, id);
 			rs = st.executeQuery();
@@ -126,8 +143,6 @@ public class VendedorDaoJDBC implements VendedorDao {
 		obj.setDataNascimento(rs.getDate("BirthDate"));
 		obj.setDepartamento(dep);
 		return obj;
-		
-	 
 	}
 
 	private Departamento instantiateDepartment(ResultSet rs) throws SQLException {
@@ -148,10 +163,6 @@ public class VendedorDaoJDBC implements VendedorDao {
 		st = conn.prepareStatement("SELECT seller.*,department.Name as DepName  FROM seller "
 					             + "INNER JOIN department  ON seller.DepartmentId = department.Id "
 					             + "order by Name");
-					            
-					            
-					 
-			
 			 
 			rs = st.executeQuery();
 			
@@ -167,7 +178,6 @@ public class VendedorDaoJDBC implements VendedorDao {
 				 
 				Vendedor obj = instantiateVendedor(rs, dep);
 				list.add(obj);
-				
 			}
 			
 			return list;
@@ -181,8 +191,6 @@ public class VendedorDaoJDBC implements VendedorDao {
 			DB.closeStatement(st);
 			DB.closeResultSet(rs);
 		}
-		
-	 
 	}
 
 	@Override
@@ -195,7 +203,6 @@ public class VendedorDaoJDBC implements VendedorDao {
 					             + "INNER JOIN department  ON seller.DepartmentId = department.Id"
 					             + "  WHERE department.Id = ? order by Name");
 					 
-			
 			st.setInt(1, departamento.getId());
 			rs = st.executeQuery();
 			
@@ -211,7 +218,6 @@ public class VendedorDaoJDBC implements VendedorDao {
 				 
 				Vendedor obj = instantiateVendedor(rs, dep);
 				list.add(obj);
-				
 			}
 			
 			return list;
@@ -219,15 +225,12 @@ public class VendedorDaoJDBC implements VendedorDao {
 		} catch(SQLException e) {
 			
 			throw new DbException(e.getMessage());
-		  
 	}
 		finally {
 			DB.closeStatement(st);
 			DB.closeResultSet(rs);
 		}
-		
-		 
-		 
+
 	}
 	 
 }
