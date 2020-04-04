@@ -7,7 +7,7 @@ public class Vendedor implements Serializable{
 	
 	 
 	private static final long serialVersionUID = 1L;
-	private int id;
+	private Integer id;
 	private String nome;
 	private String email;
 	private Date dataNascimento;
@@ -15,28 +15,50 @@ public class Vendedor implements Serializable{
 	
 	private Departamento departamento;
 	
-	public Vendedor() {
+	
+
+	 
+ 
+ 
+
+public Vendedor() {
 		
 	}
+	 
+	 
 
-	public Vendedor(int id, String nome, String email, Date dataNascimento, Double salarioBase,
-			Departamento departamento) {
-		 
-		this.id = id;
-		this.nome = nome;
-		this.email = email;
-		this.dataNascimento = dataNascimento;
-		this.salarioBase = salarioBase;
-		this.departamento = departamento;
-	}
+	 
 
-	public int getId() {
-		return id;
-	}
+	public Vendedor(Integer id, String nome, String email, Date dataNascimento, Double salarioBase,
+		Departamento departamento) {
+	super();
+	this.id = id;
+	this.nome = nome;
+	this.email = email;
+	this.dataNascimento = dataNascimento;
+	this.salarioBase = salarioBase;
+	this.departamento = departamento;
+}
 
-	public void setId(int id) {
-		this.id = id;
-	}
+
+
+
+
+	public Integer getId() {
+	return id;
+}
+
+
+
+
+
+public void setId(Integer id) {
+	this.id = id;
+}
+
+
+
+
 
 	public String getNome() {
 		return nome;

@@ -40,7 +40,11 @@ public class Programa {
 		System.out.println(obj);
 	}
 	
-		  
+	System.out.println("\n=== TEST : Vendedor insert ====");
+    Vendedor newVendedor = new Vendedor(null, "Antonio Gilberto da Silva", "agilberto20111@hotmail.com", new Date(), 12000.00, departamento);
+	
+	vendedorDao.insert(newVendedor);
+	System.out.println("Inserido novo id = " + newVendedor.getId());
 	}
 
 }
