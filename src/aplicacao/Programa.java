@@ -2,6 +2,7 @@ package aplicacao;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Scanner;
 
 import modelo.dao.DaoFactory;
 import modelo.dao.VendedorDao;
@@ -11,6 +12,8 @@ import modelo.entidade.Vendedor;
 public class Programa {
 
 	public static void main(String[] args) {
+		
+		Scanner sc = new Scanner(System.in);
 		
 	VendedorDao vendedorDao = DaoFactory.createVendedorDao();
 	
@@ -52,6 +55,20 @@ public class Programa {
 	vendedor.setEmail("leo@gmail.com");
 	vendedorDao.upadate(vendedor);
 	System.out.println("Update completado");
+	
+	System.out.println("\n=== TEST 6: Vendedor Delete ====");
+	System.out.println("Entre com o id para testar a deleção");
+	int id = sc.nextInt();
+	
+	vendedorDao.deleteById(id);
+	
+	System.out.println("Deleção completada");
+	
+	sc.close();
+			
+			
+			
+			
 			
 	}
 
